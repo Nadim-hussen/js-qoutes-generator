@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qoutes generate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            /* width: 60vw; */
+            margin: 35px auto;
+            /* background-color: #86f870; */
+        }
+
+        .card_text {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(255, 204, 255);
+        }
+
+        .author {
+            margin-top: 15px;
+        }
+
+        button {
+            background: none;
+            color: rgb(255, 102, 153);
+            padding: 10px;
+            font-size: 17px;
+            margin-top: 5px;
+        }
+
+        .head {
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(255, 102, 153);
+            font-size: 25px;
+        }
+        @media screen and (max-width: 480px){
+            .head {
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(255, 102, 153);
+            font-size: 20px;
+        }
+        }
+        @media screen and (max-width: 380px){
+            .superhead{
+                margin-top: 25px;
+            }
+            .head {
+            text-align: center;
+            margin: 10px 5px;
+            color: rgb(255, 102, 153);
+            font-size: 18px;
+        }
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="superhead">
+    <h3 class="head">Nadim Hussen qoutes generator website</h3>
+    <div class="card">
+        <div class="card_text">
+            <h3 class="qoutes_text" id="h3">
+
+            </h3>
+
+            <div class="author">
+                <footer id="footer">
+
+                </footer>
+                <button id="btn">generate quotes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- https://type.fit/api/quotes -->
+    <script>
+
+        let hthree = document.getElementById('h3')
+        let footer = document.getElementById('footer')
+        let btn = document.getElementById('btn')
+        // console.log(random)
+        let data;
+        const generateQoutes = () => {
+            var random = Math.round(Math.random() * 1642)
+            hthree.innerText = data[random].text
+            if (data[random].author == null) {
+                footer.innerText = 'Author - Nadim Hussen'
+            } else {
+                footer.innerText = `Author - ${data[random].author}`
+            }
+
+        }
+        const getqoute = async () => {
+            const qoutes = 'https://type.fit/api/quotes';
+            try {
+                let api = await fetch(qoutes)
+                data = await api.json();
+                // console.log(data)
+                generateQoutes();
+            } catch (err) {
+
+            }
+        }
+        getqoute();
+        btn.addEventListener('click', generateQoutes)
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+    </script>
+</body>
+
+</html>

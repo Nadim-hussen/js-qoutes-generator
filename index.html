@@ -27,32 +27,38 @@
         .card_text {
             text-align: center;
             padding: 20px;
-            background-color: rgb(255, 204, 255);
+            font-size: 20px;
+            background-color: rgb(255, 102, 102);
+            font-family: "Gill Sans", sans-serif;
         }
 
         .author {
             margin-top: 15px;
+            color: white;
         }
 
         button {
-            background: none;
-            color: rgb(255, 102, 153);
+            background:#ADD8E6;
+            color: #000;
             padding: 10px;
-            font-size: 17px;
+            font-size: 18px;
+            font-weight: bold;
             margin-top: 5px;
         }
 
         .head {
             text-align: center;
             margin-top: 20px;
-            color: rgb(255, 102, 153);
-            font-size: 25px;
+            color: rgb(255, 102, 102);
+            font-weight: bold;
+            font-family: "Gill Sans", sans-serif;
+            font-size: 30px;
         }
         @media screen and (max-width: 480px){
             .head {
             text-align: center;
             margin-top: 20px;
-            color: rgb(255, 102, 153);
+            color: rgb(255, 102, 102);
             font-size: 20px;
         }
         }
@@ -63,17 +69,17 @@
             .head {
             text-align: center;
             margin: 10px 5px;
-            color: rgb(255, 102, 153);
+            color: rgb(255, 102, 102);
             font-size: 18px;
         }
         }
-       
+
     </style>
 </head>
 
 <body>
     <div class="superhead">
-    <h3 class="head">Nadim Hussen qoutes generator website</h3>
+    <h3 class="head"> Advice of Crown Prince Nadim Hussen </h3>
     <div class="card">
         <div class="card_text">
             <h3 class="qoutes_text" id="h3">
@@ -84,7 +90,7 @@
                 <footer id="footer">
 
                 </footer>
-                <button id="btn">generate quotes</button>
+                <button id="btn">Advice</button>
             </div>
         </div>
     </div>
@@ -97,29 +103,34 @@
         let btn = document.getElementById('btn')
         // console.log(random)
         let data;
-        const generateQoutes = () => {
-            var random = Math.round(Math.random() * 1642)
-            hthree.innerText = data[random].text
-            if (data[random].author == null) {
-                footer.innerText = 'Author - Nadim Hussen'
-            } else {
-                footer.innerText = `Author - ${data[random].author}`
-            }
+        // const generateQoutes = () => {
+        //     var random = Math.round(Math.random() * 100)
+        //     hthree.innerText = data[random].text
+        //     if (data[random].author == null) {
+        //         footer.innerText = 'Author - Nadim Hussen'
+        //     } else {
+        //         footer.innerText = `Author - ${data[random].author}`
+        //     }
 
-        }
+        // }
         const getqoute = async () => {
-            const qoutes = 'https://type.fit/api/quotes';
+            hthree.innerText = ''
+            footer.innerText = ''
+            const qoutes = 'https://api.adviceslip.com/advice';
             try {
                 let api = await fetch(qoutes)
                 data = await api.json();
+                // console.log(data.slip.advice);
+                hthree.innerText = data.slip.advice
+                footer.innerText = "Dr. Sheikh Nadim Hussen "
                 // console.log(data)
-                generateQoutes();
+                // generateQoutes();
             } catch (err) {
 
             }
         }
         getqoute();
-        btn.addEventListener('click', generateQoutes)
+        btn.addEventListener('click', getqoute)
 //   .then((response) => response.json())
 //   .then((json) => console.log(json));
     </script>
